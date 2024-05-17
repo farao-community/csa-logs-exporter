@@ -1,0 +1,46 @@
+server:
+  port: 3030
+spring:
+  application:
+    name: csa-logs-exporter
+  datasource:
+    url: jdbc:h2:file:${HOME}/csa/logs-management
+    driverClassName: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        consumeLogEvent-in-0:
+          destination: csa-logs-exchange
+          consumer:
+            batch-mode: true
+      rabbit:
+        default:
+          consumer:
+            auto-bind-dlq: true
+            max-attempts: 1
+        bindings:
+          consumeLogEvent-in-0:
+            consumer:
+              enable-batching: true
+              batch-size: 200
+              receive-timeout: 5000
+    function:
+      definition: consumeLogEvent
+
+s3:
+  artifacts:
+    bucket: swe-csa-bucket
+    user: minioadmin
+    secret: minioadmin
+    url: http://localhost:9000
