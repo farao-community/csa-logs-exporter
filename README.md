@@ -2,7 +2,7 @@
 
 [![MPL-2.0 License](https://img.shields.io/badge/license-MPL_2.0-blue.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
 
-Helper microservice for swe-csa-runner that exports a csa calculation logs from a rabbit queue to a file minio
+Helper microservice for swe-csa-runner that exports a csa calculation logs from a rabbit queue to an attachment file or to minio 
 
 ## Build application
 
