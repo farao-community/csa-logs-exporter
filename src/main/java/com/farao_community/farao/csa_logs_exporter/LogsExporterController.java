@@ -1,7 +1,6 @@
 
 package com.farao_community.farao.csa_logs_exporter;
 
-import com.farao_community.farao.swe_csa.api.JsonApiConverter;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -18,7 +17,6 @@ public class LogsExporterController {
     private static final String JSON_API_MIME_TYPE = "application/vnd.api+json";
 
     private final CsaLogsExporterService csaLogsExporterService;
-    private final JsonApiConverter jsonApiConverter = new JsonApiConverter();
 
     public LogsExporterController(CsaLogsExporterService csaLogsExporterService) {
         this.csaLogsExporterService = csaLogsExporterService;
