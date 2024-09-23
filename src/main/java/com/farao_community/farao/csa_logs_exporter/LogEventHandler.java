@@ -25,7 +25,7 @@ public class LogEventHandler {
     }
 
     @Bean
-    public Consumer<Flux<List<byte[]>>> consumeTaskEventUpdate() {
+    public Consumer<Flux<List<byte[]>>> consumeLogEvent() {
         return f -> f.subscribe(messages -> {
             try {
                 handleTaskEventBatchUpdate(mapMessagesToListEvents(messages));

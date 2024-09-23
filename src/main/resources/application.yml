@@ -21,7 +21,7 @@ spring:
     stream:
       bindings:
         consumeLogEvent-in-0:
-          destination: csa-logs-exchange
+          destination: swe-csa-logs-exchange
           consumer:
             batch-mode: true
       rabbit:
