@@ -31,8 +31,8 @@ public final class S3AdapterUtil {
                 minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucket).build());
             }
         } catch (Exception e) {
-            LOGGER.error(String.format("Exception occurred while creating bucket: %s", bucket));
-            throw new CsaInternalException(String.format("Exception occurred while creating bucket: %s", bucket));
+            LOGGER.error("Exception occurred while creating bucket: {}", bucket);
+            throw new CsaInternalException(String.format("Exception occurred while creating bucket: %s", bucket), e.getMessage());
         }
     }
 
@@ -42,7 +42,7 @@ public final class S3AdapterUtil {
             minioClient.putObject(PutObjectArgs.builder().bucket(bucket).object(pathDestination).stream(sourceInputStream, -1, 50000000).build());
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            throw new CsaInternalException(String.format("Exception occurred while uploading file: %s, to minio server", pathDestination));
+            throw new CsaInternalException(String.format("Exception occurred while uploading file: %s, to minio server", pathDestination), e.getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ public final class S3AdapterUtil {
         try {
             return minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder().bucket(bucket).object(minioPath).expiry(DEFAULT_DOWNLOAD_LINK_EXPIRY_IN_DAYS, TimeUnit.DAYS).method(Method.GET).build());
         } catch (Exception e) {
-            throw new CsaInternalException("Exception in MinIO connection.", e);
+            throw new CsaInternalException("Exception in MinIO connection.", e.getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ public final class S3AdapterUtil {
             return file.toPath();
         } catch (Exception e) {
             String message = String.format("Cannot retrieve file '%s'", minioObjectName);
-            throw new CsaInternalException(message, e);
+            throw new CsaInternalException(message, e.getMessage());
         }
     }
 
