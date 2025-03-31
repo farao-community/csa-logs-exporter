@@ -11,7 +11,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <gridcapa.swe.csa.version>2.0.0</gridcapa.swe.csa.version>
+        <gridcapa.swe.csa.version>2.5.0</gridcapa.swe.csa.version>
         <minio.version>8.2.2</minio.version>
         <postgresql.version>42.2.16</postgresql.version>
     </properties>
